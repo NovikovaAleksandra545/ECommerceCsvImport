@@ -10,7 +10,7 @@
     <label for="filePath" class="form-label">Путь к CSV-файлу</label>
     <div class="input-group" style="max-width: 600px">
         <input type="text" id="filePath" name="filePath" value="@Model.FilePath" class="form-control" placeholder="/csv/sample_products.csv" />
-        <button type="submit" class="btn btn-primary">Импортировать</button>
+        <button type="submit" class="btn btn-success">Импортировать</button>
     </div>
     <div class="form-text">Например: /csv/sample_products.csv или C:\data\products.csv</div>
 </form>
@@ -30,7 +30,7 @@
     <label for="file" class="form-label">Или выберите файл на компьютере</label>
     <div class="input-group" style="max-width: 600px">
         <input type="file" id="file" name="file" accept=".csv" class="form-control" required />
-        <button type="submit" class="btn btn-outline-primary">Загрузить</button>
+        <button type="submit" class="btn btn-outline-success">Загрузить</button>
     </div>
 </form>
 
@@ -38,7 +38,7 @@
 {
     <h2 class="h4" id="import-result">Результат импорта @(result.FileName != "" ? "(" + result.FileName + ")" : "")</h2>
 
-    <table class="table table-bordered bg-white" style="max-width: 400px">
+    <table class="table table-bordered" style="max-width: 400px">
         <tr><th>Показатель</th><th>Значение</th></tr>
         <tr><td>Всего строк</td><td>@result.TotalRows</td></tr>
         <tr><td>Успешно импортировано</td><td>@result.ImportedCount</td></tr>
@@ -48,7 +48,7 @@
     @if (result.ErrorCount > 0)
     {
         <h3 class="h5">Список ошибок</h3>
-        <table class="table table-bordered table-sm bg-white">
+        <table class="table table-bordered table-sm">
             <tr><th style="width: 80px">Строка</th><th>Описание ошибки</th></tr>
             @foreach (var error in result.Errors)
             {
@@ -60,5 +60,5 @@
         </table>
     }
 
-    <a asp-action="Index" class="btn btn-success">Перейти к списку товаров</a>
+    <a asp-action="Index" class="btn btn-outline-success">Перейти к списку товаров</a>
 }

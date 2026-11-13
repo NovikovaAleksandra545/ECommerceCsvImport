@@ -1,12 +1,50 @@
 body {
-    background-color: #fafafa;
+    background-color: #eef3f1;
+}
+
+/* шапка сайта */
+.site-header {
+    background-color: #2a7f62;
+    color: #fff;
+    padding: 22px 0;
+    margin-bottom: 24px;
+}
+
+.site-title {
+    font-size: 1.6rem;
+    font-weight: bold;
+}
+
+.site-subtitle {
+    opacity: 0.8;
+}
+
+/* вкладки и белый блок с содержимым */
+.nav-tabs {
+    border-bottom: none;
+}
+
+.nav-tabs .nav-link {
+    color: #2a7f62;
+}
+
+.nav-tabs .nav-link.active {
+    font-weight: bold;
+}
+
+.page {
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+    border-radius: 0 6px 6px 6px;
+    padding: 24px;
 }
 
 h1 {
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     margin-bottom: 1rem;
 }
 
-table td, table th {
-    vertical-align: middle;
+/* заголовки таблиц */
+.page table th {
+    background-color: #e3f1ec;
 }

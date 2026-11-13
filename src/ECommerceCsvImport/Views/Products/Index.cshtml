@@ -8,13 +8,13 @@
 @if (Model.AllCount == 0)
 {
     <p>Товары еще не импортированы.</p>
-    <a asp-action="Import" class="btn btn-primary">Импортировать товары</a>
+    <a asp-action="Import" class="btn btn-success">Импортировать товары</a>
 }
 else
 {
     <form method="get" asp-action="Index" class="row g-2 mb-3">
         <div class="col-auto">
-            <input type="search" name="search" value="@Model.Search" class="form-control" placeholder="Поиск по названию" />
+            <input type="search" name="search" value="@Model.Search" class="form-control" style="width: 190px" placeholder="Поиск по названию" />
         </div>
         <div class="col-auto">
             <select name="category" class="form-select">
@@ -44,7 +44,7 @@ else
             </select>
         </div>
         <div class="col-auto">
-            <button type="submit" class="btn btn-secondary">Показать</button>
+            <button type="submit" class="btn btn-success">Показать</button>
             <a asp-action="Index" class="btn btn-link">Сбросить</a>
         </div>
     </form>
@@ -55,7 +55,7 @@ else
         стоимость остатков: <b>@Model.TotalValue.ToString("N0")</b> руб.
     </p>
 
-    <table class="table table-bordered table-striped table-sm bg-white">
+    <table class="table table-bordered table-striped table-sm">
         <tr>
             <th>Артикул</th>
             <th>Название</th>
@@ -84,7 +84,7 @@ else
     </table>
 
     <div class="d-flex gap-2">
-        <a asp-action="Import" class="btn btn-primary">Импортировать еще</a>
+        <a asp-action="Import" class="btn btn-success">Импортировать еще</a>
         <a class="btn btn-outline-secondary" asp-action="Export" asp-route-search="@Model.Search"
            asp-route-category="@Model.Category" asp-route-size="@Model.Size" asp-route-sort="@Model.Sort">Экспорт в CSV</a>
         <form method="post" asp-action="Clear" onsubmit="return confirm('Удалить все товары?')">
