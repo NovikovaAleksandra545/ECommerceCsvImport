@@ -7,7 +7,7 @@ namespace ECommerceCsvImport.Tests
         [Fact]
         public void Parse_SimpleLine()
         {
-            var fields = CsvLineParser.Parse("3001,Футболка белая,Летняя футболка,990,RUB,Футболки,25,/images/t.jpg,true,M,белый,хлопок");
+            var fields = CsvLineParser.Parse("3001,Чехол-книжка,Чехол с застежкой,990,RUB,Чехлы,25,/images/t.jpg,true,M,белый,силикон");
 
             Assert.Equal(12, fields.Count);
             Assert.Equal("3001", fields[0]);
@@ -16,7 +16,7 @@ namespace ECommerceCsvImport.Tests
         [Fact]
         public void Parse_EmptyFields()
         {
-            var fields = CsvLineParser.Parse("3011,Носки,,590,RUB,Аксессуары,40,,true,42,белый,");
+            var fields = CsvLineParser.Parse("3011,Чехол для ноутбука,,590,RUB,Чехлы,40,,true,13,белый,");
 
             Assert.Equal(12, fields.Count);
             Assert.Equal("", fields[2]);
@@ -26,10 +26,10 @@ namespace ECommerceCsvImport.Tests
         [Fact]
         public void Parse_CommaInsideQuotes()
         {
-            var fields = CsvLineParser.Parse("3002,\"Футболка, оверсайз\",Описание,1490,RUB,Футболки,1,,true,L,чёрный,хлопок");
+            var fields = CsvLineParser.Parse("3002,\"Чехол, противоударный\",Описание,1490,RUB,Чехлы,1,,true,L,чёрный,силикон");
 
             Assert.Equal(12, fields.Count);
-            Assert.Equal("Футболка, оверсайз", fields[1]);
+            Assert.Equal("Чехол, противоударный", fields[1]);
         }
 
         [Fact]

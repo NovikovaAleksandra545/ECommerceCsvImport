@@ -1,3 +1,3 @@
 ﻿sku,name,description,price,currency,category_name,stock,image_url,is_active,size,color,material
-3001,Футболка белая,Летняя футболка,990,RUB,Футболки,25,/images/tshirt-white.jpg,true,M,белый,хлопок
-3001,Футболка серая,Другая футболка,1090,RUB,Футболки,8,/images/tshirt-grey.jpg,true,L,серый,хлопок
+3001,Чехол-книжка для смартфона,Чехол с магнитной застежкой,890,RUB,Чехлы,25,/images/case-book.jpg,true,M,черный,экокожа
+3001,Чехол-бампер для смартфона,Другой чехол,590,RUB,Чехлы,8,/images/bumper.jpg,true,L,красный,пластик

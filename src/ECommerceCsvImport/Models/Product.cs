@@ -1,6 +1,6 @@
 namespace ECommerceCsvImport.Models
 {
-    // Товар магазина. Вариант 3 - "Одежда" (добавлены размер, цвет и материал)
+    // Товар магазина аксессуаров сервисного центра. Вариант 3 (поля размер, цвет, материал)
     public class Product
     {
         public string Sku { get; set; } = string.Empty;
@@ -13,7 +13,7 @@ namespace ECommerceCsvImport.Models
         public string ImageUrl { get; set; } = string.Empty;
         public bool IsActive { get; set; }
 
-        // Поля варианта "Одежда"
+        // Поля варианта 3
         public string Size { get; set; } = string.Empty;
         public string Color { get; set; } = string.Empty;
         public string Material { get; set; } = string.Empty;

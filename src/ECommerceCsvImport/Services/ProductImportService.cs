@@ -5,7 +5,7 @@ using ECommerceCsvImport.Models;
 namespace ECommerceCsvImport.Services
 {
     /// <summary>
-    /// Импорт товаров (вариант 3 "Одежда") из CSV: чтение файла, проверка заголовков,
+    /// Импорт товаров (вариант 3) из CSV: чтение файла, проверка заголовков,
     /// валидация строк и добавление корректных товаров в репозиторий.
     /// Строки с ошибками и дубликаты артикулов пропускаются.
     /// </summary>
@@ -21,10 +21,10 @@ namespace ECommerceCsvImport.Services
         private const string DefaultCurrency = "RUB";
         private const string DefaultCategory = "Без категории";
 
-        // Допустимые размеры одежды
+        // Допустимые размеры: буквенные или диагональ устройства в дюймах
         private static readonly string[] LetterSizes = { "S", "M", "L", "XL" };
-        private const int MinNumericSize = 30;
-        private const int MaxNumericSize = 70;
+        private const int MinNumericSize = 10;
+        private const int MaxNumericSize = 20;
 
         private readonly IProductRepository _repository;
         private readonly ILogger<ProductImportService>? _logger;
@@ -210,7 +210,7 @@ namespace ECommerceCsvImport.Services
 
             string color = get("color");
             if (color == "")
-                errors.Add("Поле color обязательно для варианта «Одежда»");
+                errors.Add("Поле color обязательно для заполнения");
 
             string currency = get("currency");
             string category = get("category_name");
@@ -232,7 +232,7 @@ namespace ECommerceCsvImport.Services
             };
         }
 
-        // Возвращает размер в нормальном виде (M, XL, 48) или пустую строку, если размер неверный
+        // Возвращает размер в нормальном виде (M, XL, 15) или пустую строку, если размер неверный
         private static string NormalizeSize(string value)
         {
             string upper = value.ToUpper();

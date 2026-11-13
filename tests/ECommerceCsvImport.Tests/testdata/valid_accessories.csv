@@ -1,0 +1,3 @@
+﻿sku,name,description,price,currency,category_name,stock,image_url,is_active,size,color,material
+3001,Чехол-книжка для смартфона,Чехол с магнитной застежкой,890,RUB,Чехлы,25,/images/case-book.jpg,true,M,черный,экокожа
+3002,Силиконовый чехол для смартфона,"Мягкий, противоударные углы",490,RUB,Чехлы,40,/images/case-silicone.jpg,true,L,прозрачный,силикон

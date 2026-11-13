@@ -10,7 +10,7 @@ namespace ECommerceCsvImport.Tests
         {
             var repository = new InMemoryProductRepository();
 
-            repository.Add(new Product { Sku = "3001", Name = "Футболка белая", Price = 990m });
+            repository.Add(new Product { Sku = "3001", Name = "Чехол-книжка", Price = 990m });
 
             var all = repository.GetAll();
             Assert.Single(all);
@@ -22,7 +22,7 @@ namespace ECommerceCsvImport.Tests
         public void GetBySku_IgnoresCaseAndSpaces()
         {
             var repository = new InMemoryProductRepository();
-            repository.Add(new Product { Sku = "AB-3001", Name = "Футболка" });
+            repository.Add(new Product { Sku = "AB-3001", Name = "Чехол" });
 
             Assert.NotNull(repository.GetBySku("AB-3001"));
             Assert.NotNull(repository.GetBySku(" ab-3001 "));

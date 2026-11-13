@@ -1,7 +1,9 @@
 # ECommerceCsvImport
 
 Модуль импорта товаров в интернет-магазин из CSV-файла с хранением в памяти.
-Производственная практика ПП.02.01, вариант 3 «Одежда».
+Производственная практика ПП.02.01, вариант 3 (поля размер, цвет, материал).
+Предметная область — магазин аксессуаров сервисного центра по ремонту техники
+(чехлы, сумки для ноутбуков, коврики, ремешки).
 
 Выполнила: Новикова Александра
 
@@ -29,7 +31,7 @@ dotnet test
 
 ```
 sku,name,description,price,currency,category_name,stock,image_url,is_active,size,color,material
-3001,Футболка белая,Летняя футболка,990,RUB,Футболки,25,/images/tshirt-white.jpg,true,M,белый,хлопок
+3001,Чехол-книжка для смартфона,Чехол с магнитной застежкой,890,RUB,Чехлы,25,/images/case-book.jpg,true,M,черный,экокожа
 ```
 
 | Поле | Проверка |
@@ -41,7 +43,7 @@ sku,name,description,price,currency,category_name,stock,image_url,is_active,size
 | category_name | если пусто — «Без категории» |
 | stock | целое число, не меньше 0 |
 | is_active | true / false / 1 / 0 |
-| size | S, M, L, XL или число от 30 до 70 |
+| size | S, M, L, XL или диагональ устройства в дюймах от 10 до 20 |
 | color | не пустое |
 | description, image_url, material | могут быть пустыми |
 

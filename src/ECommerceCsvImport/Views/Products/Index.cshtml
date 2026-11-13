@@ -72,7 +72,7 @@ else
             <tr>
                 <td><a asp-action="Details" asp-route-id="@p.Sku">@p.Sku</a></td>
                 <td>@p.Name</td>
-                <td>@p.Price.ToString("N0") @p.Currency</td>
+                <td style="white-space: nowrap">@p.Price.ToString("N0") @p.Currency</td>
                 <td>@p.CategoryName</td>
                 <td>@p.StockQuantity</td>
                 <td>@p.Size</td>
