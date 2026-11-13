@@ -62,7 +62,6 @@ src/ECommerceCsvImport
   Views/Products                      - Index (список товаров), Import, Details
   wwwroot/csv                         - примеры CSV для проверки
 tests/ECommerceCsvImport.Tests        - тесты репозитория, парсера и сервиса импорта
-docs/screenshots                      - скриншоты страниц
 docs/*.docx                           - отчет по практике и сопроводительная записка
 ```
 
