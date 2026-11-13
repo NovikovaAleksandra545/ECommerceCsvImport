@@ -1,0 +1,3 @@
+sku,name,description,price,currency,category_name,stock,image_url,is_active,size,color,material
+3301,Пижама фланелевая,Мягкая пижама,2590,RUB,Домашняя одежда,7,/images/pajamas.jpg,true,M,синий,фланель
+3302,Халат махровый,Тёплый халат,3190,RUB,Домашняя одежда,5,/images/robe.jpg,true,XL,белый,махра
