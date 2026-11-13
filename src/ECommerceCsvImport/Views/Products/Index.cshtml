@@ -1,0 +1,124 @@
+@model ProductsIndexViewModel
+@{
+    ViewData["Title"] = "Каталог";
+    var sorts = new Dictionary<string, string>
+    {
+        [""] = "Как в файле",
+        ["name"] = "По названию",
+        ["price_asc"] = "Дешевле",
+        ["price_desc"] = "Дороже",
+        ["stock"] = "Больше на складе"
+    };
+}
+
+<div class="d-flex justify-content-between align-items-start flex-wrap gap-2">
+    <div>
+        <h1>Каталог одежды</h1>
+        <p class="subtitle">Товары, загруженные из CSV и хранящиеся в памяти приложения</p>
+    </div>
+    @if (Model.AllCount > 0)
+    {
+        <div class="d-flex gap-2">
+            <a class="btn btn-light-outline" asp-action="Export" asp-route-search="@Model.Search"
+               asp-route-category="@Model.Category" asp-route-size="@Model.Size" asp-route-sort="@Model.Sort">Скачать CSV</a>
+            <form method="post" asp-action="Clear" onsubmit="return confirm('Очистить каталог?')">
+                <button type="submit" class="btn btn-light-outline">Очистить</button>
+            </form>
+        </div>
+    }
+</div>
+
+@if (Model.AllCount == 0)
+{
+    <div class="panel text-center py-5">
+        <h2>Каталог пока пуст</h2>
+        <p class="subtitle">Загрузите товары из CSV-файла, чтобы они появились здесь.</p>
+        <a asp-action="Import" class="btn btn-accent">Загрузить товары</a>
+    </div>
+}
+else
+{
+    <div class="panel">
+        <form method="get" asp-action="Index" class="filters">
+            <input type="search" name="search" value="@Model.Search" class="form-control" placeholder="Поиск по названию или артикулу" />
+            <select name="category" class="form-select">
+                <option value="">Все категории</option>
+                @foreach (var c in Model.Categories)
+                {
+                    <option value="@c" selected="@(c == Model.Category)">@c</option>
+                }
+            </select>
+            <select name="size" class="form-select">
+                <option value="">Любой размер</option>
+                @foreach (var s in Model.Sizes)
+                {
+                    <option value="@s" selected="@(s == Model.Size)">@s</option>
+                }
+            </select>
+            <select name="sort" class="form-select">
+                @foreach (var s in sorts)
+                {
+                    <option value="@s.Key" selected="@(s.Key == (Model.Sort ?? ""))">@s.Value</option>
+                }
+            </select>
+            <button type="submit" class="btn btn-accent">Найти</button>
+            <a asp-action="Index" class="btn btn-link text-muted">сбросить</a>
+        </form>
+
+        <div class="summary">
+            <div>Показано <b>@Model.Products.Count</b> из @Model.AllCount</div>
+            <div>На складе <b>@Model.TotalStock.ToString("N0")</b> шт.</div>
+            <div>Стоимость остатков <b>@Model.TotalValue.ToString("N0")</b> ₽</div>
+        </div>
+
+        @if (Model.Products.Count == 0)
+        {
+            <p class="subtitle">Ничего не найдено.</p>
+        }
+        else
+        {
+            <div class="table-responsive">
+                <table class="catalog">
+                    <tr>
+                        <th>Артикул</th>
+                        <th>Товар</th>
+                        <th>Категория</th>
+                        <th>Размер</th>
+                        <th>Цвет / материал</th>
+                        <th class="right">Остаток</th>
+                        <th class="right">Цена</th>
+                        <th>Активен</th>
+                    </tr>
+                    @foreach (var p in Model.Products)
+                    {
+                        <tr>
+                            <td class="small-text">@p.Sku</td>
+                            <td>
+                                <a class="product-name" asp-action="Details" asp-route-id="@p.Sku">@p.Name</a>
+                                <div class="small-text">@p.Description</div>
+                            </td>
+                            <td>@p.CategoryName</td>
+                            <td><span class="size">@p.Size</span></td>
+                            <td>
+                                <span class="color-dot"></span>@p.Color
+                                <div class="small-text">@(p.Material == "" ? "материал не указан" : p.Material)</div>
+                            </td>
+                            <td class="right">@p.StockQuantity</td>
+                            <td class="right">@p.Price.ToString("N0") @p.Currency</td>
+                            <td>
+                                @if (p.IsActive)
+                                {
+                                    <span class="status-on">Да</span>
+                                }
+                                else
+                                {
+                                    <span class="status-off">Нет</span>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        }
+    </div>
+}

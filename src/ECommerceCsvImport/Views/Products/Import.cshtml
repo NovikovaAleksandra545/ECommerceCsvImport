@@ -1,0 +1,87 @@
+@model ImportViewModel
+@{
+    ViewData["Title"] = "Загрузка из CSV";
+    var result = Model.Result;
+}
+
+<h1>Загрузка товаров из CSV</h1>
+<p class="subtitle">Корректные строки добавляются в каталог, по остальным выводится ошибка с номером строки.</p>
+
+<div class="panel">
+    <div class="tabs">
+        <button type="button" data-tab="tab-path" class="@(Model.ActiveTab == "path" ? "active" : "")">Путь к файлу</button>
+        <button type="button" data-tab="tab-upload" class="@(Model.ActiveTab == "upload" ? "active" : "")">Файл с компьютера</button>
+    </div>
+
+    <div id="tab-path" class="tab-page @(Model.ActiveTab == "path" ? "active" : "")">
+        <form method="post" asp-action="Import">
+            <label for="filePath" class="form-label">Путь к CSV-файлу</label>
+            <div class="d-flex gap-2 flex-wrap">
+                <input type="text" id="filePath" name="filePath" value="@Model.FilePath" class="form-control"
+                       style="max-width: 460px" placeholder="/csv/sample_products.csv" />
+                <button type="submit" class="btn btn-accent">Импортировать</button>
+            </div>
+            <div class="hint">
+                Путь внутри wwwroot (<code>/csv/sample_products.csv</code>) или полный путь (<code>C:\data\products.csv</code>).
+            </div>
+        </form>
+
+        @if (Model.SampleFiles.Count > 0)
+        {
+            <div class="sample-list">
+                @foreach (var file in Model.SampleFiles)
+                {
+                    <button type="button" data-path="@file">@System.IO.Path.GetFileName(file)</button>
+                }
+            </div>
+        }
+    </div>
+
+    <div id="tab-upload" class="tab-page @(Model.ActiveTab == "upload" ? "active" : "")">
+        <form method="post" asp-action="Upload" enctype="multipart/form-data">
+            <label for="file" class="form-label">CSV-файл</label>
+            <div class="d-flex gap-2 flex-wrap">
+                <input type="file" id="file" name="file" accept=".csv" class="form-control" style="max-width: 460px" required />
+                <button type="submit" class="btn btn-accent">Загрузить</button>
+            </div>
+            <div class="hint">UTF-8 или Windows-1251, разделитель запятая или точка с запятой, до 5 МБ.</div>
+        </form>
+    </div>
+</div>
+
+@if (result != null)
+{
+    <div class="panel" id="import-result">
+        <h2>
+            Результат импорта
+            @if (result.FileName != "")
+            {
+                <small class="text-muted">(@result.FileName)</small>
+            }
+        </h2>
+
+        <table class="result-table">
+            <tr><th>Показатель</th><th>Значение</th></tr>
+            <tr><td>Всего строк</td><td>@result.TotalRows</td></tr>
+            <tr><td>Успешно импортировано</td><td class="ok">@result.ImportedCount</td></tr>
+            <tr><td>Ошибки</td><td class="@(result.ErrorCount > 0 ? "bad" : "")">@result.ErrorCount</td></tr>
+        </table>
+
+        @if (result.ErrorCount > 0)
+        {
+            <h3 class="h5">Список ошибок</h3>
+            <table class="table table-sm errors-table">
+                <tr><th>Строка</th><th>Описание ошибки</th></tr>
+                @foreach (var error in result.Errors)
+                {
+                    <tr>
+                        <td>@(error.RowNumber == 0 ? "—" : error.RowNumber.ToString())</td>
+                        <td>@error.Message</td>
+                    </tr>
+                }
+            </table>
+        }
+
+        <a asp-action="Index" class="btn btn-light-outline">Открыть каталог →</a>
+    </div>
+}

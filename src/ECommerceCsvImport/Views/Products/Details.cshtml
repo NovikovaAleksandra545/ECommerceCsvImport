@@ -1,0 +1,37 @@
+@model Product
+@{
+    ViewData["Title"] = Model.Name;
+}
+
+<a asp-action="Index" class="text-muted small">← Каталог</a>
+
+<div class="panel mt-3">
+    <div class="d-flex justify-content-between flex-wrap gap-3">
+        <div>
+            <h1>@Model.Name</h1>
+            <p class="subtitle">@Model.CategoryName · артикул @Model.Sku</p>
+        </div>
+        <div class="text-end">
+            <div class="details-price">@Model.Price.ToString("N2") @Model.Currency</div>
+            <div class="@(Model.IsActive ? "status-on" : "status-off")">@(Model.IsActive ? "в продаже" : "не активен")</div>
+        </div>
+    </div>
+
+    @if (Model.Description != "")
+    {
+        <p>@Model.Description</p>
+    }
+
+    <dl class="row details-list mb-0">
+        <dt class="col-sm-3">Размер</dt>
+        <dd class="col-sm-9"><span class="size">@Model.Size</span></dd>
+        <dt class="col-sm-3">Цвет</dt>
+        <dd class="col-sm-9"><span class="color-dot"></span>@Model.Color</dd>
+        <dt class="col-sm-3">Материал</dt>
+        <dd class="col-sm-9">@(Model.Material == "" ? "не указан" : Model.Material)</dd>
+        <dt class="col-sm-3">Остаток</dt>
+        <dd class="col-sm-9">@Model.StockQuantity шт.</dd>
+        <dt class="col-sm-3">Изображение</dt>
+        <dd class="col-sm-9">@(Model.ImageUrl == "" ? "нет" : Model.ImageUrl)</dd>
+    </dl>
+</div>

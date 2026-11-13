@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] | Гардероб</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body>
+    @{
+        string action = ViewContext.RouteData.Values["action"]?.ToString() ?? "";
+        bool importPage = action == "Import" || action == "Upload";
+    }
+    <div class="app">
+        <aside class="sidebar">
+            <a class="logo" asp-controller="Products" asp-action="Index">
+                <span class="logo-mark">Г</span>
+                <span>
+                    <span class="logo-title">Гардероб</span>
+                    <span class="logo-sub">учёт одежды</span>
+                </span>
+            </a>
+
+            <nav class="side-menu">
+                <a class="@(importPage ? "" : "active")" asp-controller="Products" asp-action="Index">Каталог</a>
+                <a class="@(importPage ? "active" : "")" asp-controller="Products" asp-action="Import">Загрузка из CSV</a>
+            </nav>
+
+            <div class="sidebar-footer">
+                Новикова Александра<br />
+                ПП.02.01, вариант 3
+            </div>
+        </aside>
+
+        <main class="content">
+            @if (TempData["Message"] != null)
+            {
+                <div class="notice">@TempData["Message"]</div>
+            }
+            @RenderBody()
+        </main>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
