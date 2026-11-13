@@ -3,12 +3,10 @@
     ViewData["Title"] = "Ошибка";
 }
 
-<div class="panel">
-    <h1>Что-то пошло не так</h1>
-    <p class="subtitle">При обработке запроса произошла ошибка.</p>
-    @if (Model.ShowRequestId)
-    {
-        <p>Код запроса: <code>@Model.RequestId</code></p>
-    }
-    <a asp-controller="Products" asp-action="Index" class="btn btn-accent">В каталог</a>
-</div>
+<h1 class="text-danger">Ошибка</h1>
+<p>При обработке запроса произошла ошибка.</p>
+@if (Model.ShowRequestId)
+{
+    <p>Код запроса: <code>@Model.RequestId</code></p>
+}
+<a asp-controller="Products" asp-action="Index">На главную</a>

@@ -3,35 +3,19 @@
     ViewData["Title"] = Model.Name;
 }
 
-<a asp-action="Index" class="text-muted small">← Каталог</a>
+<h1>@Model.Name</h1>
 
-<div class="panel mt-3">
-    <div class="d-flex justify-content-between flex-wrap gap-3">
-        <div>
-            <h1>@Model.Name</h1>
-            <p class="subtitle">@Model.CategoryName · артикул @Model.Sku</p>
-        </div>
-        <div class="text-end">
-            <div class="details-price">@Model.Price.ToString("N2") @Model.Currency</div>
-            <div class="@(Model.IsActive ? "status-on" : "status-off")">@(Model.IsActive ? "в продаже" : "не активен")</div>
-        </div>
-    </div>
+<table class="table table-bordered bg-white" style="max-width: 600px">
+    <tr><th style="width: 200px">Артикул</th><td>@Model.Sku</td></tr>
+    <tr><th>Описание</th><td>@Model.Description</td></tr>
+    <tr><th>Цена</th><td>@Model.Price.ToString("N2") @Model.Currency</td></tr>
+    <tr><th>Категория</th><td>@Model.CategoryName</td></tr>
+    <tr><th>Остаток</th><td>@Model.StockQuantity шт.</td></tr>
+    <tr><th>Размер</th><td>@Model.Size</td></tr>
+    <tr><th>Цвет</th><td>@Model.Color</td></tr>
+    <tr><th>Материал</th><td>@Model.Material</td></tr>
+    <tr><th>Изображение</th><td>@Model.ImageUrl</td></tr>
+    <tr><th>Активен</th><td>@(Model.IsActive ? "Да" : "Нет")</td></tr>
+</table>
 
-    @if (Model.Description != "")
-    {
-        <p>@Model.Description</p>
-    }
-
-    <dl class="row details-list mb-0">
-        <dt class="col-sm-3">Размер</dt>
-        <dd class="col-sm-9"><span class="size">@Model.Size</span></dd>
-        <dt class="col-sm-3">Цвет</dt>
-        <dd class="col-sm-9"><span class="color-dot"></span>@Model.Color</dd>
-        <dt class="col-sm-3">Материал</dt>
-        <dd class="col-sm-9">@(Model.Material == "" ? "не указан" : Model.Material)</dd>
-        <dt class="col-sm-3">Остаток</dt>
-        <dd class="col-sm-9">@Model.StockQuantity шт.</dd>
-        <dt class="col-sm-3">Изображение</dt>
-        <dd class="col-sm-9">@(Model.ImageUrl == "" ? "нет" : Model.ImageUrl)</dd>
-    </dl>
-</div>
+<a asp-action="Index">Назад к списку</a>

@@ -9,7 +9,7 @@
 
 - C#, ASP.NET Core MVC (.NET 8)
 - xUnit для тестов
-- Bootstrap (из шаблона проекта) + свои стили
+- Bootstrap (из шаблона проекта)
 
 ## Как запустить
 
@@ -22,7 +22,7 @@ dotnet run --project src/ECommerceCsvImport
 dotnet test
 ```
 
-Дальше: «Загрузка из CSV» → путь `/csv/sample_products.csv` → «Импортировать».
+Дальше: «Импорт товаров» → путь `/csv/sample_products.csv` → «Импортировать».
 Должно получиться: всего строк 11, импортировано 11, ошибок 0.
 
 ## Формат CSV
@@ -52,12 +52,12 @@ sku,name,description,price,currency,category_name,stock,image_url,is_active,size
 
 ```
 src/ECommerceCsvImport
-  Controllers/ProductsController.cs   - страницы каталога и импорта
+  Controllers/ProductsController.cs   - страницы списка товаров и импорта
   Models/                             - Product, ImportResult, ImportError, модели страниц
   Services/InMemoryProductRepository  - хранение товаров в List (singleton)
   Services/ProductImportService       - чтение CSV и проверка строк
   Services/CsvLineParser              - разбор строки CSV с кавычками
-  Views/Products                      - Index (каталог), Import, Details
+  Views/Products                      - Index (список товаров), Import, Details
   wwwroot/csv                         - примеры CSV для проверки
 tests/ECommerceCsvImport.Tests        - тесты репозитория, парсера и сервиса импорта
 docs/screenshots                      - скриншоты страниц
@@ -69,7 +69,7 @@ docs/screenshots                      - скриншоты страниц
 - поиск, фильтр по категории и размеру, сортировка
 - страница товара
 - общий остаток и стоимость остатков
-- выгрузка каталога в CSV
+- выгрузка списка товаров в CSV
 - кодировка Windows-1251 и разделитель «;»
 
 ## Тестовые сценарии

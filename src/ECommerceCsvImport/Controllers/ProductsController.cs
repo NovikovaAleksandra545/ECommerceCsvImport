@@ -55,7 +55,7 @@ namespace ECommerceCsvImport.Controllers
         [HttpGet]
         public IActionResult Import()
         {
-            return View(CreateImportModel(DefaultFilePath, null, "path"));
+            return View(CreateImportModel(DefaultFilePath, null));
         }
 
         // Импорт по пути: /csv/file.csv (папка wwwroot) или полный путь C:\data\file.csv
@@ -70,7 +70,7 @@ namespace ECommerceCsvImport.Controllers
             else
                 result = _importService.ImportFromCsv(ResolvePath(filePath));
 
-            return View(CreateImportModel(filePath ?? "", result, "path"));
+            return View(CreateImportModel(filePath ?? "", result));
         }
 
         // Импорт файла, выбранного в браузере
@@ -92,7 +92,7 @@ namespace ECommerceCsvImport.Controllers
                 result = _importService.ImportFromStream(stream, file.FileName);
             }
 
-            return View("Import", CreateImportModel(DefaultFilePath, result, "upload"));
+            return View("Import", CreateImportModel(DefaultFilePath, result));
         }
 
         // Выгрузка товаров в CSV (в том же формате, что и для импорта)
@@ -168,7 +168,7 @@ namespace ECommerceCsvImport.Controllers
             return path;
         }
 
-        private ImportViewModel CreateImportModel(string filePath, ImportResult? result, string tab)
+        private ImportViewModel CreateImportModel(string filePath, ImportResult? result)
         {
             string csvFolder = Path.Combine(_environment.WebRootPath, "csv");
 
@@ -176,7 +176,6 @@ namespace ECommerceCsvImport.Controllers
             {
                 FilePath = filePath,
                 Result = result,
-                ActiveTab = tab,
                 SampleFiles = Directory.Exists(csvFolder)
                     ? Directory.GetFiles(csvFolder, "*.csv").Select(f => "/csv/" + Path.GetFileName(f)).OrderBy(f => f).ToList()
                     : new List<string>()

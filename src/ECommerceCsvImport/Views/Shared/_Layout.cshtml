@@ -3,44 +3,36 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] | Гардероб</title>
+    <title>@ViewData["Title"] - Импорт товаров</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
 </head>
 <body>
-    @{
-        string action = ViewContext.RouteData.Values["action"]?.ToString() ?? "";
-        bool importPage = action == "Import" || action == "Upload";
-    }
-    <div class="app">
-        <aside class="sidebar">
-            <a class="logo" asp-controller="Products" asp-action="Index">
-                <span class="logo-mark">Г</span>
-                <span>
-                    <span class="logo-title">Гардероб</span>
-                    <span class="logo-sub">учёт одежды</span>
-                </span>
-            </a>
+    <nav class="navbar navbar-expand-sm navbar-light bg-white border-bottom mb-4">
+        <div class="container">
+            <span class="navbar-brand">Магазин одежды</span>
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="Products" asp-action="Index">Список товаров</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="Products" asp-action="Import">Импорт товаров</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
 
-            <nav class="side-menu">
-                <a class="@(importPage ? "" : "active")" asp-controller="Products" asp-action="Index">Каталог</a>
-                <a class="@(importPage ? "active" : "")" asp-controller="Products" asp-action="Import">Загрузка из CSV</a>
-            </nav>
-
-            <div class="sidebar-footer">
-                Новикова Александра<br />
-                ПП.02.01, вариант 3
-            </div>
-        </aside>
-
-        <main class="content">
-            @if (TempData["Message"] != null)
-            {
-                <div class="notice">@TempData["Message"]</div>
-            }
-            @RenderBody()
-        </main>
+    <div class="container pb-5">
+        @if (TempData["Message"] != null)
+        {
+            <div class="alert alert-success">@TempData["Message"]</div>
+        }
+        @RenderBody()
     </div>
+
+    <footer class="container border-top py-3 text-muted small">
+        Новикова Александра, ПП.02.01, вариант 3 «Одежда»
+    </footer>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
